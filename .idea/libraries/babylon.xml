@@ -1,0 +1,13 @@
+<component name="libraryTable">
+  <library name="babylon" type="javaScript">
+    <properties>
+      <sourceFilesUrls>
+        <item url="file://$PROJECT_DIR$/public/javascripts/babylon.custom.js" />
+      </sourceFilesUrls>
+    </properties>
+    <CLASSES>
+      <root url="file://$PROJECT_DIR$/public/javascripts/babylon.custom.js" />
+    </CLASSES>
+    <SOURCES />
+  </library>
+</component>
