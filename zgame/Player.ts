@@ -1,13 +1,9 @@
-class Player {
-    pos: any;
+import {Pos} from "./Pos"
 
-    greeting: string;
-    constructor(message: string) {
-        this.greeting = message;
-    }
-    greet() {
-        return "Hello, " + this.greeting;
-    }
+
+class Player {
+    id: number;
+    pos: Pos;
 }
 
 export { Player };
