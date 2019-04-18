@@ -1,9 +1,9 @@
-import {Pos} from "./Pos"
+import Position from "./Position"
 
 
 class Player {
     id: number;
-    pos: Pos;
+    pos: Position;
 }
 
 export { Player };
