@@ -4,11 +4,14 @@
     <title><%= title %></title>
     <link rel='stylesheet' href='/stylesheets/style.css' />
     <script src="javascripts/babylon.custom.js"></script>
+    <script src="javascripts/socket.io.js"></script>
   </head>
   <body>
     <canvas id="renderCanvas"></canvas>
-    <script> //TODO przeniesc skrypty do pliku js
 
+
+    <script>
+        var socket = io();
 
         var engine = new BABYLON.Engine(renderCanvas,true);
         var scene = new BABYLON.Scene(engine);
@@ -16,6 +19,8 @@
         camera.upperBetaLimit = 1.53
         camera.attachControl(renderCanvas);
 
+        scene.clearColor = new BABYLON.Color4(0.9,0.9,0.9);
+        BABYLON.Database.IDBStorageEnabled = true;
 
         var skybox = BABYLON.Mesh.CreateBox("skyBox", 10000.0, scene);
         var skyboxMaterial = new BABYLON.StandardMaterial("skyBox", scene);
@@ -29,23 +34,10 @@
 
         var light = new BABYLON.PointLight("omni", new BABYLON.Vector3(20,100,100),scene);
 
-        BABYLON.SceneLoader.ImportMesh("","scenes/", "pirate_ship_wo_masts_no_base.stl", scene, function (newMeshes) {
-          var statek = newMeshes[0];
 
-          //GUI
-           var advancedTexture = BABYLON.GUI.AdvancedDynamicTexture.CreateFullscreenUI("UI");
-        var gui = new BABYLON.GUI.Rectangle();
-        gui.width = 0.2;
-        gui.height = "40px";
-       gui.color = "Orange";
-        gui.background = "green";
-        advancedTexture.addControl(gui);
 
-        var napis = new BABYLON.GUI.TextBlock();
-        napis.text = "statek 1";
-        gui.addControl(napis);
-        gui.linkWithMesh(statek);
-        gui.linkOffsetY = -200;
+        BABYLON.SceneLoader.ImportMesh("","scenes/", "Benchy.stl", scene, function (newMeshes) {
+
 
           // var shib = newScene[0];
           // shib.position = new BABYLON.Vector3(11111, 0, 111);
