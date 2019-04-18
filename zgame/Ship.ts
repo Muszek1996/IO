@@ -1,17 +1,13 @@
 import {Player} from "./Player"
+import {Pos} from "./Pos"
 
 class Ship {
-    greeting: string;
-    players: Player;
-    pos : any;
+    name: string;
 
+    players: Player;
+    pos : Pos;
 
     constructor(message: string) {
-        this.greeting = message;
-        this.pos = { "x": 1, y:"1" ,"z": 1};
+    }
 
-    }
-    greet() {
-        return "Hello, " + this.greeting;
-    }
 }
