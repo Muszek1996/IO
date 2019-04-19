@@ -9,8 +9,10 @@ const shipSocketConfig = (io)=>{
 
 
 
-        io.emit("sendOwnShip",playersShip);
-        socket.emit("updateShips",Ships);
+        socket.emit("myShip",playersShip);
+        socket.emit("otherExistingShips",Ships);
+        io.broadcast.emit("newlyConnectedShip", playersShip);
+
 
         Ships[playersShip.name] = (playersShip);
 
