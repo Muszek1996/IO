@@ -100,6 +100,7 @@ let initialize = function () {
     // window.addEventListener('resize', function(){
     //     engine.resize();﻿
     // });﻿﻿﻿
+    //TODO cleanup
 };
 document.addEventListener("DOMContentLoaded", function () {
     initialize();
