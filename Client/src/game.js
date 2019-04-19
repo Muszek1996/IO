@@ -88,6 +88,16 @@ let initialize = function () {
 
     engine.runRenderLoop(function (){
         scene.render();
+        document.addEventListener("keydown", event => {
+            if (event.isComposing || event.key === "a") {
+                console.log("a");
+            }
+            if (event.isComposing || event.key === "d") {
+                console.log("d");
+            }
+            //console.log("a");
+        });
+
     });
 
     // window.addEventListener('resize', function(){
