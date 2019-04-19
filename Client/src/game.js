@@ -55,6 +55,7 @@ let initialize = function () {
     waterMesh.material = water;
 
     var Ships = {};
+    var shipName = "";//TODO
 
     //socket integration
     var socket = io();
@@ -67,6 +68,7 @@ let initialize = function () {
         }
     });
     socket.on('myShip', function(ship){
+        shipName = ship.name;//TODO
         Ships[ship.name] = new Ship(ship.pos, "pirate_ship_wo_masts_no_base.stl",ship.name);
         CAMERA.getInstance().position.x = ship.pos.x-200;
         CAMERA.getInstance().position.y = ship.pos.y+100;
@@ -86,23 +88,37 @@ let initialize = function () {
     });
 
 
+    var map ={}; //object for multiple key presses
+    scene.actionManager = new BABYLON.ActionManager(scene);
+
+    scene.actionManager.registerAction(new BABYLON.ExecuteCodeAction(BABYLON.ActionManager.OnKeyDownTrigger, function (evt) {
+        map[evt.sourceEvent.key] = evt.sourceEvent.type == "keydown";
+    }));
+
+    scene.actionManager.registerAction(new BABYLON.ExecuteCodeAction(BABYLON.ActionManager.OnKeyUpTrigger, function (evt) {
+        map[evt.sourceEvent.key] = evt.sourceEvent.type == "keydown";
+    }));
+
+
+
     engine.runRenderLoop(function (){
         scene.render();
-        document.addEventListener("keydown", event => {
-            if (event.isComposing || event.key === "a") {
-                console.log("a");
-            }
-            if (event.isComposing || event.key === "d") {
-                console.log("d");
-            }
-            //console.log("a");
-        });
-
     });
 
-    // window.addEventListener('resize', function(){
-    //     engine.resize();﻿
-    // });﻿﻿﻿
+    scene.registerAfterRender(function () {
+        if(map["a"] || map["A"]){
+            console.log("a");
+        }
+        if(map["d"] || map["D"]){
+            console.log("d");
+        }
+        
+    })
+
+    window.addEventListener('resize', function(){
+         engine.resize();﻿
+     });﻿﻿﻿
+
     //TODO cleanup
 };
 document.addEventListener("DOMContentLoaded", function () {
