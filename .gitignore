@@ -1,5 +1,7 @@
+.gitignore
 node_modules
 src/public/javascripts/libs
+Client/node_modules
 
 
 //TODO FIX GIT IGNORE TO WORK :D exclude libs from public/javascript/libs
