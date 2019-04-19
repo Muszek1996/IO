@@ -2,23 +2,22 @@ import * as BABYLON from 'babylonjs'
 import 'babylonjs-materials'
 import io from 'socket.io-client';
 import {Ship} from './Ship.js'
+import {CAMERA} from './Babylon/CAMERA.js'
+import {SCENE} from './Babylon/SCENE.js'
+import {ENGINE} from './Babylon/ENGINE.js'
 
 let initialize = function () {
 
-    //TODO CLEAN HERE NIGGO
     let renderCanvas = document.getElementById("renderCanvas");
 
-    var engine = new BABYLON.Engine(renderCanvas,true);
-    var scene = new BABYLON.Scene(engine);
-    var camera = new BABYLON.ArcRotateCamera("camera",1.17,1.22,500,new BABYLON.Vector3(111,111,111),scene);
-    camera.upperBetaLimit = 1.53;
-    camera.attachControl(renderCanvas);
+    var engine = ENGINE.getInstance();
+    var scene = SCENE.getInstance();
+    var camera = CAMERA.getInstance();
 
-    scene.clearColor = new BABYLON.Color4(0.9,0.9,0.9);
     BABYLON.Database.IDBStorageEnabled = true;
 
-    var skybox = BABYLON.Mesh.CreateBox("skyBox", 10000.0, scene);
-    var skyboxMaterial = new BABYLON.StandardMaterial("skyBox", scene);
+    let skybox = BABYLON.Mesh.CreateBox("skyBox", 10000.0, scene);
+    let skyboxMaterial = new BABYLON.StandardMaterial("skyBox", scene);
     skyboxMaterial.backFaceCulling = false;
     skyboxMaterial.reflectionTexture = new BABYLON.CubeTexture("textures/TropicalSunnyDay", scene);
     skyboxMaterial.reflectionTexture.coordinatesMode = BABYLON.Texture.SKYBOX_MODE;
@@ -27,7 +26,7 @@ let initialize = function () {
     skyboxMaterial.disableLighting = true;
     skybox.material = skyboxMaterial;
 
-    var light = new BABYLON.PointLight("omni", new BABYLON.Vector3(1111,1111,1111),scene);
+    let light = new BABYLON.PointLight("omni", new BABYLON.Vector3(1111,1111,1111),scene);
 
 
 
@@ -92,17 +91,20 @@ let initialize = function () {
     var socket = io();
 
     socket.on('updateShips', function(ships){
-        console.log(ships);
+        console.log("OtherShips"+JSON.stringify(ships));
         for (var k in ships){
             if (ships.hasOwnProperty(k)) {
                 Ships[ships[k].name] = new Ship(ships[k].pos, scene, "pirate_ship_wo_masts_no_base.stl",ships[k].name);
+                CAMERA.getInstance().position = new BABYLON.Vector3(111,111,111);
             }
         }
     });
 
     socket.on('sendOwnShip', function(ship){
-        console.log(ship);
+        console.log("MyShip:"+JSON.stringify(ship));
         Ships[ship.name] = new Ship(ship.pos, scene, "pirate_ship_wo_masts_no_base.stl",ship.name);
+        CAMERA.getInstance().position = new BABYLON.Vector3(111,111,111);
+
     });
 
     socket.on('shipDisconnected', function(shipID){
@@ -117,6 +119,10 @@ let initialize = function () {
     engine.runRenderLoop(function (){
         scene.render();
     });
+
+    // window.addEventListener('resize', function(){
+    //     engine.resize();﻿
+    // });﻿﻿﻿
 };
 document.addEventListener("DOMContentLoaded", function () {
     initialize();

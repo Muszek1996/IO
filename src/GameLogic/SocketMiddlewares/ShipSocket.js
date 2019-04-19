@@ -6,13 +6,13 @@ const shipSocketConfig = (io)=>{
 
     io.on('connection', function(socket){
         let playersShip = new Ship(0,100*Object.keys(Ships).length,0,socket.id.toString());
-        Ships[playersShip.name] = (playersShip);
 
-        console.log('an user connected');
+
+
+        io.emit("sendOwnShip",playersShip);
         socket.emit("updateShips",Ships);
-        socket.broadcast.emit("sendOwnShip",playersShip);
-        // socket.broadcast.to(socket.id).emit("sendOwnShip",playersShip);
 
+        Ships[playersShip.name] = (playersShip);
 
         socket.on('disconnect', function(){
             io.emit("shipDisconnected", playersShip.name);
