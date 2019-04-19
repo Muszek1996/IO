@@ -14,7 +14,6 @@ let initialize = function () {
     var engine = ENGINE.getInstance();
     var scene = SCENE.getInstance();
     var camera = CAMERA.getInstance();
-
     BABYLON.Database.IDBStorageEnabled = true;
 
     let skybox = BABYLON.Mesh.CreateBox("skyBox", 10000.0, scene);

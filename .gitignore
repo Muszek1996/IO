@@ -1,5 +1,0 @@
-node_modules
-src/public/javascripts/libs
-
-
-//TODO FIX GIT IGNORE TO WORK :D exclude libs from public/javascript/libs
