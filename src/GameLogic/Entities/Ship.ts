@@ -1,11 +1,12 @@
-import Position from "../Utils/Position"
+//import Position from "../Utils/Position"
+import * as BABYLON from 'babylonjs'
 
 class Ship {
     name: string;
-    pos : Position;
+    pos : BABYLON.Vector3;
 
     constructor(x, z, y=0, name="defaultShip") {
-        this.pos = new Position(x,z,y);
+        this.pos = new BABYLON.Vector3(x,y,z);
         this.name = name;
     }
 
