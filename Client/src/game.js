@@ -9,11 +9,10 @@ import {ENGINE} from './Babylon/ENGINE.js'
 
 let initialize = function () {
 
-    let renderCanvas = document.getElementById("renderCanvas");
+    let scene = SCENE.getInstance();
+    let engine = ENGINE.getInstance();
+    let camera = CAMERA.getInstance();
 
-    var engine = ENGINE.getInstance();
-    var scene = SCENE.getInstance();
-    var camera = CAMERA.getInstance();
     BABYLON.Database.IDBStorageEnabled = true;
 
     let skybox = BABYLON.Mesh.CreateBox("skyBox", 10000.0, scene);
@@ -27,7 +26,6 @@ let initialize = function () {
     skybox.material = skyboxMaterial;
 
     let light = new BABYLON.PointLight("omni", new BABYLON.Vector3(1111,1111,1111),scene);
-
     var material = new BABYLON.StandardMaterial("std",scene);
     material.diffuseColor = new BABYLON.Color3(1,0,0);
 
@@ -62,38 +60,44 @@ let initialize = function () {
     var socket = io();
 
     socket.on('otherExistingShips', function(ships){
-        console.log("OtherShips"+JSON.stringify(ships));
         for (var k in ships){
             if (ships.hasOwnProperty(k)) {
                 Ships[ships[k].name] = new Ship(ships[k].pos, "pirate_ship_wo_masts_no_base.stl",ships[k].name);
             }
         }
     });
-
     socket.on('myShip', function(ship){
-        console.log("MyShip:"+JSON.stringify(ship));
         Ships[ship.name] = new Ship(ship.pos, "pirate_ship_wo_masts_no_base.stl",ship.name);
-        CAMERA.getInstance().position.x = ship.pos.x;
-        CAMERA.getInstance().position.y = ship.pos.y;
+        CAMERA.getInstance().position.x = ship.pos.x-200;
+        CAMERA.getInstance().position.y = ship.pos.y+100;
         CAMERA.getInstance().position.z = ship.pos.z;
-        console.log(CAMERA.getInstance().position);
-        console.log(ship.pos);
+        CAMERA.getInstance().target = ship;
+        CAMERA.getInstance().rotation = new BABYLON.Vector3(BABYLON.Tools.ToRadians(20), BABYLON.Tools.ToRadians(90), BABYLON.Tools.ToRadians(0));
+
     });
 
     socket.on('newlyConnectedShip', function(ship){
-        console.log("MyShip:"+JSON.stringify(ship));
         Ships[ship.name] = new Ship(ship.pos, "pirate_ship_wo_masts_no_base.stl",ship.name);
     });
 
     socket.on('shipDisconnected', function(shipID){
         scene.meshes.find(x => x.name === shipID).dispose();
         delete Ships[shipID];
-        console.log("Received remove ship:"+shipID+" command");
     });
 
 
     engine.runRenderLoop(function (){
         scene.render();
+        document.addEventListener("keydown", event => {
+            if (event.isComposing || event.key === "a") {
+                console.log("a");
+            }
+            if (event.isComposing || event.key === "d") {
+                console.log("d");
+            }
+            //console.log("a");
+        });
+
     });
 
     // window.addEventListener('resize', function(){
