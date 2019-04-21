@@ -1,6 +1,6 @@
 import {Player} from "../../src/GameLogic/Entities/Player";
-import {OwnShip} from "./Entities/OwnShip";
-import {EnemyShip} from "./Entities/EnemyShip";
+import {OwnShip} from "./Entities/Ships/OwnShip";
+import {EnemyShip} from "./Entities/Ships/EnemyShip";
 import {ENGINE} from "./Babylon/ENGINE";
 import {SCENE} from "./Babylon/SCENE";
 import * as BABYLON from "babylonjs";
@@ -81,17 +81,36 @@ export class Game {
         });
 
         this.socket.on('createMyShip', function(ship){
+            console.log("Received own ship");
+            console.log(ship);
             self.myShip = new OwnShip(ship);
             CAMERA.getInstance().position.x = ship.pos.x-200;
             CAMERA.getInstance().position.y = ship.pos.y+100;
             CAMERA.getInstance().position.z = ship.pos.z;
 /*            CAMERA.getInstance().target = SCENE.getInstance().getMeshByName(ship.name);
             CAMERA.getInstance().rotation = new BABYLON.Vector3(BABYLON.Tools.ToRadians(20), BABYLON.Tools.ToRadians(90), BABYLON.Tools.ToRadians(0));*/
+            self.myShip.draw();
         });
 
-        this.socket.on('otherExistingShips', function(){
-
+        this.socket.on('otherExistingShips', function(ships){
+            console.log("Received other existing ships");
+            console.log(ships);
+            for (var k in ships){
+                if (ships.hasOwnProperty(k)) {
+                    self.enemyShips[ships[k].name] = new EnemyShip(ships[k]);
+                    self.enemyShips[ships[k].name].draw();
+                }
+            }
         });
+        this.socket.on('newlyConnectedShip', function(ship){
+            console.log("Received newly connected ship");
+            console.log(ship);
+            let enemyShip =  new EnemyShip(ship);
+            self.enemyShips[ship.name] = enemyShip;
+            enemyShip.draw();
+        });
+
+
     }
 
 

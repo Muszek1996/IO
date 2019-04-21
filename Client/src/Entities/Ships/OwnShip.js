@@ -1,4 +1,17 @@
 "use strict";
+var __extends = (this && this.__extends) || (function () {
+    var extendStatics = function (d, b) {
+        extendStatics = Object.setPrototypeOf ||
+            ({ __proto__: [] } instanceof Array && function (d, b) { d.__proto__ = b; }) ||
+            function (d, b) { for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p]; };
+        return extendStatics(d, b);
+    };
+    return function (d, b) {
+        extendStatics(d, b);
+        function __() { this.constructor = d; }
+        d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
+    };
+})();
 var __importStar = (this && this.__importStar) || function (mod) {
     if (mod && mod.__esModule) return mod;
     var result = {};
@@ -7,21 +20,19 @@ var __importStar = (this && this.__importStar) || function (mod) {
     return result;
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-var EntityCreator_js_1 = require("./Utils/EntityCreator.js");
-var SCENE_1 = require("../Babylon/SCENE");
-var CAMERA_1 = require("../Babylon/CAMERA");
+var SCENE_1 = require("../../Babylon/SCENE");
+var CAMERA_1 = require("../../Babylon/CAMERA");
 var BABYLON = __importStar(require("babylonjs"));
+var Ship_1 = require("./Ship");
 var LEFT = 65; // A
 var RIGHT = 68; // D
 var UP = 87; // W
 var DOWN = 83; // S
-var OwnShip = /** @class */ (function () {
+var OwnShip = /** @class */ (function (_super) {
+    __extends(OwnShip, _super);
     function OwnShip(ship) {
-        this.keyFired = {};
-        this.pos = ship.pos;
-        this.name = ship.name;
-        this.meshFile = ship.meshFile;
-        EntityCreator_js_1.EntityCreator.create(this);
+        var _this = _super.call(this, ship) || this;
+        _this.keyFired = {};
         //TEMP SHIT
         var scene = SCENE_1.SCENE.getInstance();
         var map = {}; //object for multiple key presses
@@ -51,12 +62,13 @@ var OwnShip = /** @class */ (function () {
                 OwnShip.keyDown[DOWN] = true;
             }
         });
+        return _this;
     }
     OwnShip.prototype.applyMovement = function (deltaTime) {
         //console.log(OwnShip.ownShipMesh);
-        if (!this.ownShipMesh)
+        if (!this.mesh)
             return;
-        var mesh = this.ownShipMesh;
+        var mesh = this.mesh;
         var contactPoint = mesh.absolutePosition.clone();
         contactPoint.y += 20;
         var force = 2 * deltaTime; // That means a maximum of 20 force / second
@@ -77,5 +89,5 @@ var OwnShip = /** @class */ (function () {
     };
     OwnShip.keyDown = {};
     return OwnShip;
-}());
+}(Ship_1.Ship));
 exports.OwnShip = OwnShip;
