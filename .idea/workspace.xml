@@ -1,23 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="8ce87b2e-d28a-48e8-b195-553919fccf90" name="Default Changelist" comment="complete io emits">
-      <change afterPath="$PROJECT_DIR$/Client/src/App.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Client/src/Entities/EnemyShip.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Client/src/Game.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/IO.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/IO.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Client/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/Client/package-lock.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Client/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/Client/package.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Client/src/Babylon/CAMERA.ts" beforeDir="false" afterPath="$PROJECT_DIR$/Client/src/Babylon/CAMERA.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Client/src/Entities/Ship.ts" beforeDir="false" afterPath="$PROJECT_DIR$/Client/src/Entities/Ship.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Client/src/Entities/Utils/EntityCreator.ts" beforeDir="false" afterPath="$PROJECT_DIR$/Client/src/Entities/Utils/EntityCreator.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Client/src/game.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Client/webpack.config.js" beforeDir="false" afterPath="$PROJECT_DIR$/Client/webpack.config.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/package-lock.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/GameLogic/SocketMiddlewares/ShipSocket.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/GameLogic/SocketMiddlewares/ShipSocket.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/public/javascripts/game.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/public/javascripts/game.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/services/socket.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/services/socket.js" afterDir="false" />
+    <list default="true" id="8ce87b2e-d28a-48e8-b195-553919fccf90" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/scripts/game_logic/Player.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/scripts/game_logic/Player.js.map" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/scripts/game_logic/Position.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/scripts/game_logic/Position.js.map" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/scripts/game_logic/Ship.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/scripts/game_logic/Ship.js.map" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/scripts/public/javascripts/game/Game.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/scripts/public/javascripts/game/Game.js.map" beforeDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/.tmp/" />
     <ignored path="$PROJECT_DIR$/public/javascripts/" />
@@ -70,14 +62,23 @@
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="true">
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/Client/src/Game.ts">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="92">
-              <caret line="14" column="33" lean-forward="true" selection-start-line="14" selection-start-column="33" selection-end-line="14" selection-end-column="33" />
+              <caret line="14" column="33" selection-start-line="14" selection-start-column="33" selection-end-line="14" selection-end-column="33" />
               <folding>
                 <element signature="e#0#59#0" expanded="true" />
               </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/src/GameLogic/Entities/Ship.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="150">
+              <caret line="9" column="49" lean-forward="true" selection-start-line="9" selection-start-column="49" selection-end-line="9" selection-end-column="49" />
             </state>
           </provider>
         </entry>
@@ -86,7 +87,7 @@
         <entry file="file://$PROJECT_DIR$/Client/src/Babylon/CAMERA.ts">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="184">
-              <caret line="8" column="97" lean-forward="true" selection-start-line="8" selection-start-column="97" selection-end-line="8" selection-end-column="97" />
+              <caret line="8" column="97" selection-start-line="8" selection-start-column="97" selection-end-line="8" selection-end-column="97" />
               <folding>
                 <element signature="e#0#37#0" expanded="true" />
               </folding>
@@ -108,27 +109,6 @@
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="299">
               <caret line="47993" column="8" selection-start-line="47993" selection-start-column="8" selection-end-line="47993" selection-end-column="8" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/Client/src/Babylon/SCENE.ts">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="184">
-              <caret line="8" column="61" selection-start-line="8" selection-start-column="61" selection-end-line="8" selection-end-column="61" />
-              <folding>
-                <element signature="e#0#31#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/Client/src/Babylon/ENGINE.ts">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="115">
-              <caret line="5" column="11" selection-start-line="5" selection-start-column="11" selection-end-line="5" selection-end-column="11" />
             </state>
           </provider>
         </entry>
@@ -217,70 +197,7 @@
             <path>
               <item name="IO" type="b2602c69:ProjectViewProjectNode" />
               <item name="IO" type="462c0819:PsiDirectoryNode" />
-              <item name="Client" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="IO" type="b2602c69:ProjectViewProjectNode" />
-              <item name="IO" type="462c0819:PsiDirectoryNode" />
-              <item name="Client" type="462c0819:PsiDirectoryNode" />
               <item name="src" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="IO" type="b2602c69:ProjectViewProjectNode" />
-              <item name="IO" type="462c0819:PsiDirectoryNode" />
-              <item name="Client" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="Babylon" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="IO" type="b2602c69:ProjectViewProjectNode" />
-              <item name="IO" type="462c0819:PsiDirectoryNode" />
-              <item name="Client" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="Entities" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="IO" type="b2602c69:ProjectViewProjectNode" />
-              <item name="IO" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="IO" type="b2602c69:ProjectViewProjectNode" />
-              <item name="IO" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="GameLogic" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="IO" type="b2602c69:ProjectViewProjectNode" />
-              <item name="IO" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="GameLogic" type="462c0819:PsiDirectoryNode" />
-              <item name="SocketMiddlewares" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="IO" type="b2602c69:ProjectViewProjectNode" />
-              <item name="IO" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="public" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="IO" type="b2602c69:ProjectViewProjectNode" />
-              <item name="IO" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="public" type="462c0819:PsiDirectoryNode" />
-              <item name="javascripts" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="IO" type="b2602c69:ProjectViewProjectNode" />
-              <item name="IO" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="services" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="IO" type="b2602c69:ProjectViewProjectNode" />
-              <item name="IO" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="views" type="462c0819:PsiDirectoryNode" />
             </path>
           </expand>
           <select />
@@ -372,7 +289,7 @@
       <workItem from="1555692872883" duration="38000" />
       <workItem from="1555692982990" duration="469000" />
       <workItem from="1555693465360" duration="5393000" />
-      <workItem from="1555792450594" duration="12851000" />
+      <workItem from="1555792450594" duration="13123000" />
     </task>
     <task id="LOCAL-00001" summary="nic">
       <created>1555445868146</created>
@@ -402,11 +319,18 @@
       <option name="project" value="LOCAL" />
       <updated>1555697608410</updated>
     </task>
-    <option name="localTasksCounter" value="5" />
+    <task id="LOCAL-00005" summary="recreated frontend logic, using classes and moved to typescript">
+      <created>1555805485748</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1555805485748</updated>
+    </task>
+    <option name="localTasksCounter" value="6" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="38338000" />
+    <option name="totallyTimeSpent" value="38610000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -422,16 +346,16 @@
     <editor active="true" />
     <layout>
       <window_info id="npm" order="0" side_tool="true" />
-      <window_info content_ui="combo" id="Project" order="1" visible="true" weight="0.19829424" />
+      <window_info active="true" content_ui="combo" id="Project" order="1" visible="true" weight="0.19829424" />
       <window_info id="Structure" order="2" side_tool="true" weight="0.25" />
       <window_info id="Favorites" order="3" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" sideWeight="0.4989339" weight="0.32887402" />
-      <window_info active="true" anchor="bottom" id="Run" order="2" sideWeight="0.49253732" visible="true" weight="0.32887402" />
+      <window_info anchor="bottom" id="Run" order="2" sideWeight="0.49253732" weight="0.32887402" />
       <window_info anchor="bottom" id="Debug" order="3" sideWeight="0.49840087" weight="0.3997833" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
-      <window_info anchor="bottom" id="TODO" order="6" sideWeight="0.49946696" weight="0.32887402" />
+      <window_info anchor="bottom" id="TODO" order="6" sideWeight="0.49946696" visible="true" weight="0.32887402" />
       <window_info anchor="bottom" id="Docker" order="7" show_stripe_button="false" />
       <window_info anchor="bottom" id="Version Control" order="8" sideWeight="0.5879531" weight="0.32887402" />
       <window_info anchor="bottom" id="File Transfer" order="9" sideWeight="0.49946696" weight="0.32936078" />
@@ -470,10 +394,10 @@
     <MESSAGE value="change player to class" />
     <MESSAGE value="add GameAssesets" />
     <MESSAGE value="complete io emits" />
-    <option name="LAST_COMMIT_MESSAGE" value="complete io emits" />
+    <MESSAGE value="recreated frontend logic, using classes and moved to typescript" />
+    <option name="LAST_COMMIT_MESSAGE" value="recreated frontend logic, using classes and moved to typescript" />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/TODO" />
     <entry file="file://$PROJECT_DIR$/public/javascripts/babylon.custom.js" />
     <entry file="file://$PROJECT_DIR$/views/index.ejs" />
     <entry file="file://$PROJECT_DIR$/public/javascripts/Player.js" />
@@ -503,13 +427,6 @@
     <entry file="file://$PROJECT_DIR$/Client/game/Game.ts" />
     <entry file="file://$PROJECT_DIR$/src/GameLogic/Entities/Player.js">
       <provider selected="true" editor-type-id="text-editor" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/GameLogic/Entities/Ship.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="323">
-          <caret line="19" column="16" selection-start-line="19" selection-start-column="16" selection-end-line="19" selection-end-column="16" />
-        </state>
-      </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/Client/src/Babylon/CAMERA.js">
       <provider selected="true" editor-type-id="text-editor">
@@ -678,7 +595,7 @@
     <entry file="file://$PROJECT_DIR$/Client/src/Babylon/CAMERA.ts">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="184">
-          <caret line="8" column="97" lean-forward="true" selection-start-line="8" selection-start-column="97" selection-end-line="8" selection-end-column="97" />
+          <caret line="8" column="97" selection-start-line="8" selection-start-column="97" selection-end-line="8" selection-end-column="97" />
           <folding>
             <element signature="e#0#37#0" expanded="true" />
           </folding>
@@ -695,10 +612,22 @@
     <entry file="file://$PROJECT_DIR$/Client/src/Game.ts">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="92">
-          <caret line="14" column="33" lean-forward="true" selection-start-line="14" selection-start-column="33" selection-end-line="14" selection-end-column="33" />
+          <caret line="14" column="33" selection-start-line="14" selection-start-column="33" selection-end-line="14" selection-end-column="33" />
           <folding>
             <element signature="e#0#59#0" expanded="true" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/scripts/public/javascripts/game/Game.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-345" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/GameLogic/Entities/Ship.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="150">
+          <caret line="9" column="49" lean-forward="true" selection-start-line="9" selection-start-column="49" selection-end-line="9" selection-end-column="49" />
         </state>
       </provider>
     </entry>
