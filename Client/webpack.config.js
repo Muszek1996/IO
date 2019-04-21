@@ -5,5 +5,6 @@ module.exports = {
     output: {
         filename: 'game.js',
         path: resolve(__dirname,'../src/public/javascripts/')
-    }
+    },
+    devtool: 'source-map'
 };

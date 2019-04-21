@@ -1,6 +1,6 @@
 import {EntityCreator} from './Utils/EntityCreator.js'
 
-export class EnemyShip {
+export class EnemyShip extends Ship {
     pos : BABYLON.Vector3;
     mesh : BABYLON.Mesh;
 

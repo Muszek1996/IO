@@ -1,4 +1,4 @@
-const {Ship} = require('../Entities/Ship');
+const {Ship} = require('../Entities/Ship');   //TODO TS
 
 let Ships = {};
 
@@ -7,12 +7,12 @@ const shipSocketConfig = (io)=>{
     io.on('connection', function(socket){
         let playersShip = new Ship(0,100*Object.keys(Ships).length,0,socket.id.toString());//TODO ship creator /factiory
 
-        console.log('User:'+socket.id+'disconnected')
+        console.log('User:'+socket.id+'disconnected');
 
 
-        socket.emit("createMyShip",playersShip);
-        //socket.emit("otherExistingShips",Ships);
-        //socket.broadcast.emit("newlyConnectedShip", playersShip);
+        socket.emit("createMyShip",playersShip);    //send own ship to player
+        socket.emit("otherExistingShips",Ships);    //send other players ship to connected player
+        socket.broadcast.emit("newlyConnectedShip", playersShip);   //send newly connected player to others
 
 
         Ships[playersShip.name] = (playersShip);

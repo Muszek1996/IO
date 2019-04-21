@@ -76,10 +76,10 @@ export class OwnShip {
             mesh.applyImpulse(direction.negate(), contactPoint);
         }
         if(OwnShip.keyDown[LEFT]){
-            CAMERA.getInstance().position.x -= 0.06;
+          CAMERA.getInstance().position.x -= 0.06;
         }
         if(OwnShip.keyDown[RIGHT]){
-            CAMERA.getInstance().position.x += 0.06;
+          CAMERA.getInstance().position.x += 0.06;
         }
     }
 

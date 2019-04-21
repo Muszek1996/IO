@@ -14,6 +14,7 @@ var Ship = /** @class */ (function () {
         if (name === void 0) { name = "defaultShip"; }
         this.pos = new BABYLON.Vector3(x, y, z);
         this.name = name;
+        this.meshFile = "pirate_ship_wo_masts_no_base.stl";
     }
     return Ship;
 }());
