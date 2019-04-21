@@ -16,7 +16,6 @@ export class OwnShip extends Ship {
 
     constructor(ship){
         super(ship);
-        CAMERA.getInstance().
         //TEMP SHIT
         let scene = SCENE.getInstance();
 

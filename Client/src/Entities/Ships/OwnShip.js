@@ -33,8 +33,6 @@ var OwnShip = /** @class */ (function (_super) {
     function OwnShip(ship) {
         var _this = _super.call(this, ship) || this;
         _this.keyFired = {};
-        CAMERA_1.CAMERA.getInstance().
-        ;
         //TEMP SHIT
         var scene = SCENE_1.SCENE.getInstance();
         var map = {}; //object for multiple key presses
