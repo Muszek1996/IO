@@ -11,8 +11,5 @@ export class CAMERA{
         }
         return CAMERA.instance;
     }
-/*
-    static addCamera(): void{
-        SCENE.getInstance()
-    }*/
+
 }

@@ -5,8 +5,9 @@ import {ENGINE} from "./Babylon/ENGINE";
 import {SCENE} from "./Babylon/SCENE";
 import * as BABYLON from "babylonjs";
 import io from 'socket.io-client';
-import 'babylonjs-materials'
-import 'babylonjs-loaders'
+import 'babylonjs-materials';
+import 'babylonjs-loaders';
+import 'babylonjs/Oimo';
 import {CAMERA} from "./Babylon/CAMERA";
 import {Water} from "./Water";
 import {SkyBox} from "./SkyBox";
@@ -43,16 +44,16 @@ export class Game {
             this.engine.resize();
         });
 
-        //this.loadPhysics();
+        this.loadPhysics();
         this.run();
         this.attachSocket();
     }
 
     public loadPhysics(): void {
-        this.scene.enablePhysics(new BABYLON.Vector3(0, 0, 0), new BABYLON.OimoJSPlugin());
-        this.scene.executeWhenReady(() => {
-            this.run();
-        });
+        this.scene.enablePhysics(new BABYLON.Vector3(0,-9.81, 0), new BABYLON.OimoJSPlugin());
+        // this.scene.executeWhenReady(() => {
+        //     this.run();
+        // });
     }
 
     public run(): void{
