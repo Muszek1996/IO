@@ -7,7 +7,7 @@ const socketConfig = (http)=>{
 
             //SOMEHOW MOVE  SHIP EVENTS TO OTHER CLASS/FILE
 
-    io.on('connection', function(socket){
+ /*   io.on('connection', function(socket){
         console.log('An user:'+socket.id+' connected');
 
         socket.on('disconnect', function(){
@@ -15,7 +15,7 @@ const socketConfig = (http)=>{
         });
 
     });
-
+*/
     gameSockets(io);
     return io;
 }

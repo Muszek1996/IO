@@ -16,7 +16,7 @@ export class EntityCreator {
             task.loadedMeshes[0].name = name;
             task.loadedMeshes[0].position = new BABYLON.Vector3(pos.x, pos.y, pos.z);
         };
-        meshTask.onError = function (task, message, exception) {
+        meshTask.onError = function (task, message,  exception) {
             console.log(message, exception);
         };
 

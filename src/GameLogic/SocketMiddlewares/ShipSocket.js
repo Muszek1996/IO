@@ -5,13 +5,14 @@ let Ships = {};
 const shipSocketConfig = (io)=>{
 
     io.on('connection', function(socket){
-        let playersShip = new Ship(0,100*Object.keys(Ships).length,0,socket.id.toString());
+        let playersShip = new Ship(0,100*Object.keys(Ships).length,0,socket.id.toString());//TODO ship creator /factiory
+
+        console.log('User:'+socket.id+'disconnected')
 
 
-
-        socket.emit("myShip",playersShip);
-        socket.emit("otherExistingShips",Ships);
-        socket.broadcast.emit("newlyConnectedShip", playersShip);
+        socket.emit("createMyShip",playersShip);
+        //socket.emit("otherExistingShips",Ships);
+        //socket.broadcast.emit("newlyConnectedShip", playersShip);
 
 
         Ships[playersShip.name] = (playersShip);
