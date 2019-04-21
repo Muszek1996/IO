@@ -1,5 +1,4 @@
 const socket = require('socket.io');
-
 const gameSockets = require('../GameLogic/SocketMiddlewares/ShipSocket');
 
 const socketConfig = (http)=>{
