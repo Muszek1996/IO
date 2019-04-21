@@ -6,7 +6,7 @@ var __importStar = (this && this.__importStar) || function (mod) {
     result["default"] = mod;
     return result;
 };
-//import Position from "../Utils/Position"
+Object.defineProperty(exports, "__esModule", { value: true });
 var BABYLON = __importStar(require("babylonjs"));
 var Ship = /** @class */ (function () {
     function Ship(x, z, y, name) {
@@ -18,5 +18,5 @@ var Ship = /** @class */ (function () {
     }
     return Ship;
 }());
-module.exports = { Ship: Ship };
+exports.Ship = Ship;
 //TODO SOME SHIP/ENTITY CREATOR AND TROUGH SOCKET SENDER

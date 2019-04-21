@@ -1,32 +1,26 @@
-const {Ship} = require('../Entities/Ship');   //TODO TS
-
-let Ships = {};
-
-const shipSocketConfig = (io)=>{
-
-    io.on('connection', function(socket){
-        let playersShip = new Ship(0,100*Object.keys(Ships).length,0,socket.id.toString());//TODO ship creator /factiory
-
-        console.log('User:'+socket.id+'disconnected');
-
-
-        socket.emit("createMyShip",playersShip);    //send own ship to player
-        socket.emit("otherExistingShips",Ships);    //send other players ship to connected player
-        socket.broadcast.emit("newlyConnectedShip", playersShip);   //send newly connected player to others
-
-
-        Ships[playersShip.name] = (playersShip);
-
-        socket.on('disconnect', function(){
-            io.emit("shipDisconnected", playersShip.name);
-            delete Ships[playersShip.name];
-            playersShip = null;
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+var Ship_1 = require("../Entities/Ship");
+var ShipSocket = /** @class */ (function () {
+    function ShipSocket() {
+        this.Ships = {};
+    }
+    ShipSocket.prototype.attachShipsMidleware = function (io) {
+        var self = this;
+        io.on('connection', function (socket) {
+            var playerShip = new Ship_1.Ship(0, 100 * Object.keys(self.Ships).length, 0, socket.id.toString()); //TODO ship creator /factiory;
+            socket.emit("createMyShip", playerShip); //send own ship to player
+            socket.emit("otherExistingShips", self.Ships); //send other players ship to connected player
+            socket.broadcast.emit("newlyConnectedShip", playerShip); //send newly connected player to others
+            self.Ships[playerShip.name] = (playerShip);
+            socket.on('disconnect', function () {
+                io.emit("shipDisconnected", playerShip.name);
+                delete self.Ships[playerShip.name];
+                playerShip = null;
+            });
         });
-
-    });
-
-    return io;
-}
-
-module.exports = shipSocketConfig;
-
+        return io;
+    };
+    return ShipSocket;
+}());
+exports.ShipSocket = ShipSocket;
