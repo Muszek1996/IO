@@ -21,7 +21,6 @@ var __importStar = (this && this.__importStar) || function (mod) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 var SCENE_1 = require("../../Babylon/SCENE");
-var CAMERA_1 = require("../../Babylon/CAMERA");
 var BABYLON = __importStar(require("babylonjs"));
 var Ship_1 = require("./Ship");
 var LEFT = 65; // A
@@ -56,7 +55,6 @@ var OwnShip = /** @class */ (function (_super) {
             }
             if (map["w"] || map["W"]) {
                 OwnShip.keyDown[UP] = true;
-                console.log("Pressing W");
             }
             if (map["s"] || map["S"]) {
                 OwnShip.keyDown[DOWN] = true;
@@ -70,21 +68,34 @@ var OwnShip = /** @class */ (function (_super) {
             return;
         var mesh = this.mesh;
         var contactPoint = mesh.absolutePosition.clone();
-        contactPoint.y += 20;
-        var force = 2 * deltaTime; // That means a maximum of 20 force / second
-        var direction = new BABYLON.Vector3(1, 0, 0).multiplyByFloats(force, force, force);
+        contactPoint.y += 50;
+        var force = 0.002 * deltaTime; // That means a maximum of 20 force / second
+        var directionUP = new BABYLON.Vector3(1, 0, 0).multiplyByFloats(force, force, force);
+        var directionDOWN = new BABYLON.Vector3(-1, 0, 0).multiplyByFloats(force, force, force);
+        var directionLEFT = new BABYLON.Vector3(0, 0, 1).multiplyByFloats(force, force, force);
+        var directionRIGHT = new BABYLON.Vector3(0, 0, -1).multiplyByFloats(force, force, force);
+        var rotaton = new BABYLON.Vector3(this.mesh.rotationQuaternion.x, this.mesh.rotationQuaternion.y, this.mesh.rotationQuaternion.z);
+        var yRotation = this.mesh.rotationQuaternion.y;
+        var x = Math.cos(yRotation) - Math.sin(yRotation);
+        var z = Math.cos(yRotation) + Math.sin(yRotation);
         if (OwnShip.keyDown[UP]) {
-            mesh.applyImpulse(direction, contactPoint);
-            console.log("applying ");
+            console.log("RotationOfShip:");
+            console.log(this.mesh);
+            this.mesh.applyImpulse(rotaton, contactPoint);
+            var axisX = BABYLON.Mesh.CreateLines("axisX", [
+                contactPoint, new BABYLON.Vector3(contactPoint.x + x, contactPoint.y, contactPoint.z + z)
+            ], SCENE_1.SCENE.getInstance());
+            var contact = BABYLON.Mesh.CreateSphere("vectorStartingPoint", 12, 10, SCENE_1.SCENE.getInstance());
+            axisX.color = new BABYLON.Color3(1, 0, 0);
         }
         if (OwnShip.keyDown[DOWN]) {
-            mesh.applyImpulse(direction.negate(), contactPoint);
+            this.mesh.applyImpulse(directionDOWN, contactPoint);
         }
         if (OwnShip.keyDown[LEFT]) {
-            CAMERA_1.CAMERA.getInstance().position.x -= 0.06;
+            this.mesh.applyImpulse(directionLEFT, contactPoint);
         }
         if (OwnShip.keyDown[RIGHT]) {
-            CAMERA_1.CAMERA.getInstance().position.x += 0.06;
+            this.mesh.applyImpulse(directionRIGHT, contactPoint);
         }
     };
     OwnShip.keyDown = {};

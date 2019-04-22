@@ -44,7 +44,6 @@ export class OwnShip extends Ship {
             }
             if(map["w"] || map["W"]){
                 OwnShip.keyDown[UP]=true;
-                console.log("Pressing W");
             }
             if(map["s"] || map["S"]){
                 OwnShip.keyDown[DOWN]=true;
@@ -59,21 +58,42 @@ export class OwnShip extends Ship {
         if(!this.mesh)return;
         let mesh =  this.mesh;
         let contactPoint: BABYLON.Vector3 = mesh.absolutePosition.clone();
-        contactPoint.y += 20;
-        let force: number = 2 * deltaTime;  // That means a maximum of 20 force / second
-        let direction: BABYLON.Vector3 = new BABYLON.Vector3(1,0,0).multiplyByFloats(force, force, force);
+        contactPoint.y += 50;
+        let force: number = 0.002 * deltaTime;  // That means a maximum of 20 force / second
+        let directionUP: BABYLON.Vector3 = new BABYLON.Vector3(1,0,0).multiplyByFloats(force, force, force);
+        let directionDOWN: BABYLON.Vector3 = new BABYLON.Vector3(-1,0,0).multiplyByFloats(force, force, force);
+        let directionLEFT: BABYLON.Vector3 = new BABYLON.Vector3(0,0,1).multiplyByFloats(force, force, force);
+        let directionRIGHT: BABYLON.Vector3 = new BABYLON.Vector3(0,0,-1).multiplyByFloats(force, force, force);
+
+        let rotaton = new BABYLON.Vector3(this.mesh.rotationQuaternion.x, this.mesh.rotationQuaternion.y, this.mesh.rotationQuaternion.z);
+
+        let yRotation = this.mesh.rotationQuaternion.y;
+
+        let x = Math.cos(yRotation)-Math.sin(yRotation);
+        let z = Math.cos(yRotation)+Math.sin(yRotation);
+
+
         if(OwnShip.keyDown[UP]){
-            mesh.applyImpulse(direction, contactPoint);
-            console.log("applying ")
+            console.log("RotationOfShip:");
+            console.log(this.mesh);
+            this.mesh.applyImpulse(rotaton, contactPoint);
+            var axisX = BABYLON.Mesh.CreateLines("axisX", [
+                contactPoint, new BABYLON.Vector3(contactPoint.x+x,contactPoint.y,contactPoint.z+z)
+            ], SCENE.getInstance());
+            var contact = BABYLON.Mesh.CreateSphere("vectorStartingPoint",12,10,SCENE.getInstance());
+            axisX.color = new BABYLON.Color3(1, 0, 0);
+
+
         }
+
         if(OwnShip.keyDown[DOWN]){
-            mesh.applyImpulse(direction.negate(), contactPoint);
+            this.mesh.applyImpulse(directionDOWN, contactPoint);
         }
         if(OwnShip.keyDown[LEFT]){
-          CAMERA.getInstance().position.x -= 0.06;
+            this.mesh.applyImpulse(directionLEFT, contactPoint);
         }
         if(OwnShip.keyDown[RIGHT]){
-          CAMERA.getInstance().position.x += 0.06;
+            this.mesh.applyImpulse(directionRIGHT, contactPoint);
         }
     }
 

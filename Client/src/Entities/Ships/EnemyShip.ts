@@ -6,6 +6,9 @@ export class EnemyShip extends Ship {
         super(ship);
     }
 
+    dispose():void{
+        this.mesh.dispose();
+    }
 }
 
 

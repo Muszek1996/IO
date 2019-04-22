@@ -30,12 +30,11 @@ export class Game {
 
     constructor() {
 
-        this.canvas = document.getElementById("");
         this.camera = CAMERA.getInstance();
         this.engine = ENGINE.getInstance();
         this.scene = SCENE.getInstance();
         this.socket = io();
-
+        this.loadPhysics();
         this.skyBox = new SkyBox();
         this.water = new Water();
         this.water.addToRenderList(this.skyBox.skyBoxMesh);
@@ -45,27 +44,28 @@ export class Game {
             this.engine.resize();
         });
 
-        this.loadPhysics();
+
         this.run();
         this.attachSocket();
 
     }
 
     public loadPhysics(): void {
-        this.scene.enablePhysics(new BABYLON.Vector3(0,-9.81, 0), new BABYLON.OimoJSPlugin());
+        let phsicsEnabled = this.scene.enablePhysics(new BABYLON.Vector3(0,-9.81, 0), new BABYLON.OimoJSPlugin());
+        console.log("Is physics initialized?:"+ phsicsEnabled.toString());
         this.scene.executeWhenReady(() => {
             this.run();
         });
     }
 
     public run(): void{
+        let self = this;
         this.engine.runRenderLoop(() => {
             this.scene.render();
             let deltaTime = this.engine.getDeltaTime();
 
-            // console.log(Game.myShip);
-            // if(Game.myShip!=null)
-            //     Game.myShip.applyMovement(deltaTime);
+            if(self.myShip!=null)
+                self.myShip.applyMovement(deltaTime);
 
         });
     }
@@ -76,20 +76,24 @@ export class Game {
     private attachSocket(): void{
         let self = this;
 
-        this.socket.on('myShipDisconnected', function(){
-
+        this.socket.on('shipDisconnected', function(shipName){
+                self.enemyShips[shipName].dispose();
+                //console.log("Ship to dispose:");
+                //console.log(self.enemyShips[shipName]);
+                delete self.enemyShips[shipName];
         });
 
         this.socket.on('createMyShip', function(ship){
             console.log("Received own ship");
             console.log(ship);
             self.myShip = new OwnShip(ship);
-            CAMERA.getInstance().position.x = ship.pos.x-200;
+            CAMERA.getInstance().position.x = ship.pos.x+200;
             CAMERA.getInstance().position.y = ship.pos.y+100;
             CAMERA.getInstance().position.z = ship.pos.z;
 /*            CAMERA.getInstance().target = SCENE.getInstance().getMeshByName(ship.name);
             CAMERA.getInstance().rotation = new BABYLON.Vector3(BABYLON.Tools.ToRadians(20), BABYLON.Tools.ToRadians(90), BABYLON.Tools.ToRadians(0));*/
             self.myShip.draw();
+            console.log(self.myShip);
         });
 
         this.socket.on('otherExistingShips', function(ships){

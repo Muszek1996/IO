@@ -6,7 +6,6 @@ var EntityCreator = /** @class */ (function () {
     }
     EntityCreator.create = function (ship) {
         BABYLON.SceneLoader.ImportMesh([ship.name], "scenes/", ship.meshFile, SCENE_1.SCENE.getInstance(), function (meshes) {
-            console.log(meshes);
             ship.ownShipMesh = meshes[0];
             meshes[0].position = new BABYLON.Vector3(ship.pos.x, ship.pos.y, ship.pos.z);
         });

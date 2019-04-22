@@ -8,7 +8,7 @@ var ShipSocket = /** @class */ (function () {
     ShipSocket.prototype.attachShipsMidleware = function (io) {
         var self = this;
         io.on('connection', function (socket) {
-            var playerShip = new Ship_1.Ship(0, 100 * Object.keys(self.Ships).length, 0, socket.id.toString()); //TODO ship creator /factiory;
+            var playerShip = new Ship_1.Ship(0, 100 * Object.keys(self.Ships).length, 150, socket.id.toString()); //TODO ship creator /factiory;
             socket.emit("createMyShip", playerShip); //send own ship to player
             socket.emit("otherExistingShips", self.Ships); //send other players ship to connected player
             socket.broadcast.emit("newlyConnectedShip", playerShip); //send newly connected player to others

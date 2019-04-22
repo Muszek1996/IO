@@ -6,7 +6,7 @@ import * as BABYLON from "babylonjs";
 export class Ship {
     private pos : BABYLON.Vector3;
     private name : string;
-    private meshFile : Ship;
+    private meshFile : string;
     public mesh : BABYLON.Mesh;
 
 
