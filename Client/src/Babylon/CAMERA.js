@@ -16,6 +16,7 @@ var CAMERA = /** @class */ (function () {
         if (!CAMERA.instance) {
             CAMERA.instance = new BABYLON.FreeCamera("mainCamera", BABYLON.Vector3.Zero(), SCENE_1.SCENE.getInstance());
             CAMERA.instance.attachControl(document.getElementById("renderCanvas"));
+            CAMERA.maxZ = 100000;
         }
         return CAMERA.instance;
     };

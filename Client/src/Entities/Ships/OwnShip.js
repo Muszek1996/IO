@@ -69,7 +69,7 @@ var OwnShip = /** @class */ (function (_super) {
         var mesh = this.mesh;
         var contactPoint = mesh.absolutePosition.clone();
         contactPoint.y += 50;
-        var force = 0.002 * deltaTime; // That means a maximum of 20 force / second
+        var force = 0.2 * deltaTime; // That means a maximum of 20 force / second
         var directionUP = new BABYLON.Vector3(1, 0, 0).multiplyByFloats(force, force, force);
         var directionDOWN = new BABYLON.Vector3(-1, 0, 0).multiplyByFloats(force, force, force);
         var directionLEFT = new BABYLON.Vector3(0, 0, 1).multiplyByFloats(force, force, force);
@@ -81,7 +81,7 @@ var OwnShip = /** @class */ (function (_super) {
         if (OwnShip.keyDown[UP]) {
             console.log("RotationOfShip:");
             console.log(this.mesh);
-            this.mesh.applyImpulse(rotaton, contactPoint);
+            this.mesh.applyImpulse(directionUP, contactPoint);
             var axisX = BABYLON.Mesh.CreateLines("axisX", [
                 contactPoint, new BABYLON.Vector3(contactPoint.x + x, contactPoint.y, contactPoint.z + z)
             ], SCENE_1.SCENE.getInstance());

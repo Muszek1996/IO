@@ -7,7 +7,7 @@ export class SkyBox {
 
     constructor(){
         this.scene = SCENE.getInstance();
-        this.skyBoxMesh = BABYLON.Mesh.CreateBox("skyBox", 10000.0, this.scene);
+        this.skyBoxMesh = BABYLON.Mesh.CreateBox("skyBox",10000.0, this.scene);
         this.skyBoxMaterial = new BABYLON.StandardMaterial("skyBox", this.scene);
 
         this.skyBoxMaterial.backFaceCulling = false;

@@ -51,7 +51,7 @@ export class Game {
     }
 
     public loadPhysics(): void {
-        let phsicsEnabled = this.scene.enablePhysics(new BABYLON.Vector3(0,-9.81, 0), new BABYLON.OimoJSPlugin());
+        let phsicsEnabled = this.scene.enablePhysics(new BABYLON.Vector3(0,-981, 0), new BABYLON.OimoJSPlugin());
         console.log("Is physics initialized?:"+ phsicsEnabled.toString());
         this.scene.executeWhenReady(() => {
             this.run();
