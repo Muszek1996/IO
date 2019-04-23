@@ -6,7 +6,7 @@ var __importStar = (this && this.__importStar) || function (mod) {
     result["default"] = mod;
     return result;
 };
-//import Position from "../Utils/Position"
+Object.defineProperty(exports, "__esModule", { value: true });
 var BABYLON = __importStar(require("babylonjs"));
 var Ship = /** @class */ (function () {
     function Ship(x, z, y, name) {
@@ -14,8 +14,9 @@ var Ship = /** @class */ (function () {
         if (name === void 0) { name = "defaultShip"; }
         this.pos = new BABYLON.Vector3(x, y, z);
         this.name = name;
+        this.meshFile = "pirate_ship_wo_masts_no_base.stl";
     }
     return Ship;
 }());
-module.exports = { Ship: Ship };
+exports.Ship = Ship;
 //TODO SOME SHIP/ENTITY CREATOR AND TROUGH SOCKET SENDER

@@ -6,8 +6,9 @@ export class CAMERA{
 
     static getInstance(): BABYLON.Camera{
         if(!CAMERA.instance){
-            CAMERA.instance = new BABYLON.FollowCamera("mainCamera", BABYLON.Vector3.Zero(), SCENE.getInstance())
+            CAMERA.instance = new BABYLON.FreeCamera("mainCamera", BABYLON.Vector3.Zero(), SCENE.getInstance());
             CAMERA.instance.attachControl(<HTMLCanvasElement>document.getElementById("renderCanvas"));
+            CAMERA.maxZ = 100000;
         }
         return CAMERA.instance;
     }

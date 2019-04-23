@@ -2,7 +2,8 @@
 <project version="4">
   <component name="WebServers">
     <option name="servers">
-      <webServer id="0afa67f9-1844-4580-a7d4-80a66a669772" name="DigitalOcean" url="http://206.189.15.46">
+      <webServer id="72f06888-cd26-421c-9e19-9343d15b7dd1" name="DigitalOcean" url="http://206.189.15.46">
+        <fileTransfer host="206.189.15.46" port="22" privateKey="C:\Users\Muszek\Downloads\IOPrivateVPSKey.ppk" rootFolder="/WWW" accessType="SFTP" keyPair="true">
           <advancedOptions>
             <advancedOptions dataProtectionLevel="Private" passiveMode="true" shareSSLContext="true" />
           </advancedOptions>
