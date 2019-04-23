@@ -19,6 +19,12 @@ const expressConfig = () => {
     app.use(express.urlencoded({ extended: false }));
     app.use(cookieParser());
     app.use(express.static(path.join(__dirname, '../public')));
+    //DEVELOPMENT ONLY
+    app.use(express.static(path.join(__dirname, '../../Client/src')));
+    app.use(express.static(path.join(__dirname, '../../Client/src/Babylon')));
+    app.use(express.static(path.join(__dirname, '../../Client/src/Entities/Ships')));
+    app.use(express.static(path.join(__dirname, '../../Client/src/Entities/Utils')));
+    //END DEVELOPMENT ONLY
 
     app.use('/', indexRouter);
     app.use('/users', usersRouter);

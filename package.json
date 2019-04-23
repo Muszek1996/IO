@@ -3,7 +3,7 @@
   "version": "0.0.6",
   "private": true,
   "scripts": {
-    "start": "node /WWW/index.js"
+    "start": "node src/index.js"
   },
   "dependencies": {
     "babylonjs": "^3.3.0",
