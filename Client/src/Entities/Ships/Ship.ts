@@ -14,10 +14,11 @@ export class Ship {
         this.pos = ship.pos;
         this.name = ship.name;
         this.meshFile = ship.meshFile;
+        this.draw();
     }
 
     draw(){
-        EntityDrawer.create(this);
+        EntityDrawer.create(this,null);
     }
 }
 

@@ -1,7 +1,8 @@
 import { Game } from './Game'
 
 let initialize = function () {
-    let game = new Game();
+    // @ts-ignore   // shows error but no error xD
+    window.game = new Game();
 };
 
 document.addEventListener("DOMContentLoaded", function () {

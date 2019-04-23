@@ -84,16 +84,7 @@ export class Game {
         });
 
         this.socket.on('createMyShip', function(ship){
-            console.log("Received own ship");
-            console.log(ship);
             self.myShip = new OwnShip(ship);
-            CAMERA.getInstance().position.x = ship.pos.x+200;
-            CAMERA.getInstance().position.y = ship.pos.y+100;
-            CAMERA.getInstance().position.z = ship.pos.z;
-/*            CAMERA.getInstance().target = SCENE.getInstance().getMeshByName(ship.name);
-            CAMERA.getInstance().rotation = new BABYLON.Vector3(BABYLON.Tools.ToRadians(20), BABYLON.Tools.ToRadians(90), BABYLON.Tools.ToRadians(0));*/
-            self.myShip.draw();
-            console.log(self.myShip);
         });
 
         this.socket.on('otherExistingShips', function(ships){

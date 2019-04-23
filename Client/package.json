@@ -13,6 +13,7 @@
     "babylonjs": "^3.3.0",
     "babylonjs-loaders": "^3.3.0",
     "babylonjs-materials": "^3.3.0",
+    "oimo": "^1.0.9",
     "socket.io-client": "^2.2.0"
   },
   "devDependencies": {
