@@ -23,7 +23,7 @@ export class Water {
         this.waterMaterial.waveSpeed = 50;
 
         this.waterMesh.material = this.waterMaterial;
-        this.waterMesh.physicsImpostor = new BABYLON.PhysicsImpostor(this.waterMesh, BABYLON.PhysicsImpostor.BoxImpostor, { mass: 0, restitution: 0.9 }, this.scene);
+        this.waterMesh.physicsImpostor = new BABYLON.PhysicsImpostor(this.waterMesh, BABYLON.PhysicsImpostor.BoxImpostor, { mass: 0, restitution: 0.01 , friction:0.1  }, this.scene);
     }
 
     public addToRenderList(mesh : BABYLON.Mesh) : void{

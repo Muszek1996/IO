@@ -71,30 +71,38 @@ var OwnShip = /** @class */ (function (_super) {
         var contactPoint = mesh.absolutePosition.clone();
         contactPoint.y += 30;
         //contactPoint.x +=150;
-        var force = 0.2 * deltaTime; // That means a maximum of 20 force / second
+        var force = 0.04 * deltaTime; // That means a maximum of 20 force / second
         function getForwardVector(_mesh) {
             _mesh.computeWorldMatrix(true);
             var forward_local = new BABYLON.Vector3(1, 0, 0);
             var worldMatrix = _mesh.getWorldMatrix();
             return BABYLON.Vector3.TransformNormal(forward_local, worldMatrix);
         }
+        function getRightVector(_mesh) {
+            _mesh.computeWorldMatrix(true);
+            var forward_local = new BABYLON.Vector3(0, 0, -1);
+            var worldMatrix = _mesh.getWorldMatrix();
+            return BABYLON.Vector3.TransformNormal(forward_local, worldMatrix);
+        }
+        var contactPointRightOffset = 0.9;
         var forward = getForwardVector(this.mesh);
-        contactPoint = contactPoint.add(forward.multiplyByFloats(100, 0, 100)); // Move contact point to front of ship;
+        contactPoint = contactPoint.add(forward.multiplyByFloats(100, 0, 100)).add(getRightVector(this.mesh).multiplyByFloats(contactPointRightOffset, contactPointRightOffset, contactPointRightOffset)); // Move contact point to front of ship;
         if (OwnShip.keyDown[UP]) {
             this.mesh.applyImpulse(forward.multiplyByFloats(force, force, force), contactPoint);
             var lines = BABYLON.Mesh.CreateLines("lines", [contactPoint, contactPoint.add(forward.multiplyByFloats(10 * force, force, 10 * force))], SCENE_1.SCENE.getInstance());
             var contact = BABYLON.Mesh.CreateSphere("vectorStartingPoint", 3, 1, SCENE_1.SCENE.getInstance());
             contact.position = contactPoint;
             lines.color = new BABYLON.Color3(1, 0, 0);
+            this.mesh.getPhysicsImpostor().getObjectCenter();
         }
         if (OwnShip.keyDown[DOWN]) {
             this.mesh.applyImpulse(forward.negate().multiplyByFloats(force, force, force), contactPoint);
         }
         if (OwnShip.keyDown[LEFT]) {
-            this.mesh.applyImpulse(this.mesh.forward.multiplyByFloats(force * 0.1, force * 0.1, force * 0.1).negate(), contactPoint);
+            this.mesh.applyImpulse(this.mesh.forward.multiplyByFloats(force * 0.1, force * 0.1, force * 0.1), contactPoint);
         }
         if (OwnShip.keyDown[RIGHT]) {
-            this.mesh.applyImpulse(this.mesh.forward.multiplyByFloats(force * 0.1, force * 0.1, force * 0.1), contactPoint);
+            this.mesh.applyImpulse(this.mesh.forward.multiplyByFloats(force * 0.1, force * 0.1, force * 0.1).negate(), contactPoint);
         }
     };
     OwnShip.prototype.draw = function () {

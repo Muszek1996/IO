@@ -34938,8 +34938,10 @@ var CAMERA = /** @class */ (function () {
     }
     CAMERA.getInstance = function () {
         if (!CAMERA.instance) {
-            CAMERA.instance = new BABYLON.FreeCamera("mainCamera", new BABYLON.Vector3(-100, 100, -300), SCENE_1.SCENE.getInstance());
+            CAMERA.instance = new BABYLON.FreeCamera("mainCamera", new BABYLON.Vector3(-162, 100, 0), SCENE_1.SCENE.getInstance());
             CAMERA.instance.attachControl(document.getElementById("renderCanvas"), true);
+            CAMERA.instance.rotation.y = Math.PI / 2;
+            CAMERA.instance.rotation.x = 0.1;
             // //The goal distance of camera from target
             // CAMERA.instance.radius = 450;
             //
@@ -35156,30 +35158,38 @@ var OwnShip = /** @class */ (function (_super) {
         var contactPoint = mesh.absolutePosition.clone();
         contactPoint.y += 30;
         //contactPoint.x +=150;
-        var force = 0.2 * deltaTime; // That means a maximum of 20 force / second
+        var force = 0.04 * deltaTime; // That means a maximum of 20 force / second
         function getForwardVector(_mesh) {
             _mesh.computeWorldMatrix(true);
             var forward_local = new BABYLON.Vector3(1, 0, 0);
             var worldMatrix = _mesh.getWorldMatrix();
             return BABYLON.Vector3.TransformNormal(forward_local, worldMatrix);
         }
+        function getRightVector(_mesh) {
+            _mesh.computeWorldMatrix(true);
+            var forward_local = new BABYLON.Vector3(0, 0, -1);
+            var worldMatrix = _mesh.getWorldMatrix();
+            return BABYLON.Vector3.TransformNormal(forward_local, worldMatrix);
+        }
+        var contactPointRightOffset = 0.9;
         var forward = getForwardVector(this.mesh);
-        contactPoint = contactPoint.add(forward.multiplyByFloats(100, 0, 100)); // Move contact point to front of ship;
+        contactPoint = contactPoint.add(forward.multiplyByFloats(100, 0, 100)).add(getRightVector(this.mesh).multiplyByFloats(contactPointRightOffset, contactPointRightOffset, contactPointRightOffset)); // Move contact point to front of ship;
         if (OwnShip.keyDown[UP]) {
             this.mesh.applyImpulse(forward.multiplyByFloats(force, force, force), contactPoint);
             var lines = BABYLON.Mesh.CreateLines("lines", [contactPoint, contactPoint.add(forward.multiplyByFloats(10 * force, force, 10 * force))], SCENE_1.SCENE.getInstance());
             var contact = BABYLON.Mesh.CreateSphere("vectorStartingPoint", 3, 1, SCENE_1.SCENE.getInstance());
             contact.position = contactPoint;
             lines.color = new BABYLON.Color3(1, 0, 0);
+            this.mesh.getPhysicsImpostor().getObjectCenter();
         }
         if (OwnShip.keyDown[DOWN]) {
             this.mesh.applyImpulse(forward.negate().multiplyByFloats(force, force, force), contactPoint);
         }
         if (OwnShip.keyDown[LEFT]) {
-            this.mesh.applyImpulse(this.mesh.forward.multiplyByFloats(force * 0.1, force * 0.1, force * 0.1).negate(), contactPoint);
+            this.mesh.applyImpulse(this.mesh.forward.multiplyByFloats(force * 0.1, force * 0.1, force * 0.1), contactPoint);
         }
         if (OwnShip.keyDown[RIGHT]) {
-            this.mesh.applyImpulse(this.mesh.forward.multiplyByFloats(force * 0.1, force * 0.1, force * 0.1), contactPoint);
+            this.mesh.applyImpulse(this.mesh.forward.multiplyByFloats(force * 0.1, force * 0.1, force * 0.1).negate(), contactPoint);
         }
     };
     OwnShip.prototype.draw = function () {
@@ -35241,7 +35251,7 @@ var EntityDrawer = /** @class */ (function () {
     EntityDrawer.create = function (ship, func) {
         BABYLON.SceneLoader.ImportMesh([ship.name], "scenes/", ship.meshFile, SCENE_1.SCENE.getInstance(), function (meshes) {
             ship.mesh = meshes[0];
-            ship.mesh.physicsImpostor = new BABYLON.PhysicsImpostor(ship.mesh, BABYLON.PhysicsImpostor.BoxImpostor, { mass: 800000, restitution: 0.01, friction: 0.001 }, SCENE_1.SCENE.getInstance()); //.setDeltaRotation(this._plus90X);
+            ship.mesh.physicsImpostor = new BABYLON.PhysicsImpostor(ship.mesh, BABYLON.PhysicsImpostor.BoxImpostor, { mass: 0.1, restitution: 0.01, friction: 0.01 }, SCENE_1.SCENE.getInstance()); //.setDeltaRotation(this._plus90X);
             console.log("Created ship:");
             console.log(ship);
             meshes[0].position = new BABYLON.Vector3(ship.pos.x, ship.pos.y, ship.pos.z);
@@ -35448,7 +35458,7 @@ var Water = /** @class */ (function () {
         this.waterMaterial.waveLength = 0.01;
         this.waterMaterial.waveSpeed = 50;
         this.waterMesh.material = this.waterMaterial;
-        this.waterMesh.physicsImpostor = new BABYLON.PhysicsImpostor(this.waterMesh, BABYLON.PhysicsImpostor.BoxImpostor, { mass: 0, restitution: 0.9 }, this.scene);
+        this.waterMesh.physicsImpostor = new BABYLON.PhysicsImpostor(this.waterMesh, BABYLON.PhysicsImpostor.BoxImpostor, { mass: 0, restitution: 0.01, friction: 0.1 }, this.scene);
     }
     Water.prototype.addToRenderList = function (mesh) {
         this.waterMaterial.addToRenderList(mesh);

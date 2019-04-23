@@ -14,8 +14,10 @@ var CAMERA = /** @class */ (function () {
     }
     CAMERA.getInstance = function () {
         if (!CAMERA.instance) {
-            CAMERA.instance = new BABYLON.FreeCamera("mainCamera", new BABYLON.Vector3(-100, 100, -300), SCENE_1.SCENE.getInstance());
+            CAMERA.instance = new BABYLON.FreeCamera("mainCamera", new BABYLON.Vector3(-162, 100, 0), SCENE_1.SCENE.getInstance());
             CAMERA.instance.attachControl(document.getElementById("renderCanvas"), true);
+            CAMERA.instance.rotation.y = Math.PI / 2;
+            CAMERA.instance.rotation.x = 0.1;
             // //The goal distance of camera from target
             // CAMERA.instance.radius = 450;
             //
